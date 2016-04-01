@@ -50,7 +50,7 @@ public class StatusEffect {
     }
 
     public void decrementDuration() {
-        this.duration--;
+        if(!permanent) this.duration--;
     }
 
     public boolean isPermanent() {

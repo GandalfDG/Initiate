@@ -11,8 +11,7 @@
         android:layout_height="150dp"
         android:id="@+id/CurrentCharCard"
         android:elevation="3dp"
-        android:longClickable="true"
-        style="@android:style/Theme.Material.Light">
+        android:longClickable="true">
 
         <TextView
             android:layout_width="wrap_content"

@@ -8,7 +8,7 @@ import java.util.Iterator;
  * and a list of active status effects.
  * Created by Jack on 4/1/2016.
  */
-public class Character {
+public class Character implements Comparable<Character> {
     private String characterName;
     /* the value of the initiative roll is stored regardless of current initiative position */
     private int initiativeRoll;
@@ -36,6 +36,12 @@ public class Character {
             /* if the status effect duration hits 0, remove it from the list */
             if(status.getDuration() <= 0) statusIterator.remove();
         }
+    }
+
+    /* this will allow a list of characters to be sorted by initiative */
+    public int compareTo(Character c) {
+        Integer roll = initiativeRoll;
+        return roll.compareTo(c.getInitiativeRoll());
     }
 
     public String getCharacterName() {
