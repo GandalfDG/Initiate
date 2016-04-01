@@ -49,6 +49,10 @@ public class StatusEffect {
         this.duration = duration;
     }
 
+    public void decrementDuration() {
+        this.duration--;
+    }
+
     public boolean isPermanent() {
         return permanent;
     }

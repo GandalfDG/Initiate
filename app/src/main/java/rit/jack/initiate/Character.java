@@ -1,6 +1,7 @@
 package rit.jack.initiate;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The character class defines a character with a name, an initiative roll,
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Character {
     private String characterName;
-    //the value of the initiative roll is stored regardless of current initiative position
+    /* the value of the initiative roll is stored regardless of current initiative position */
     private int initiativeRoll;
     private ArrayList<StatusEffect> statusEffects;  //TODO build status effect class
 
@@ -23,6 +24,18 @@ public class Character {
         this.characterName = characterName;
         this.initiativeRoll = initiativeRoll;
         this.statusEffects = statusEffects;
+    }
+
+    /* after a character's turn is taken, the duration of status effects is decremented by 1 */
+    public void updateStatusDuration() {
+        Iterator<StatusEffect> statusIterator = statusEffects.iterator();
+        /* iterate through the list of status effects */
+        while(statusIterator.hasNext()) {
+            StatusEffect status = statusIterator.next();
+            status.decrementDuration();
+            /* if the status effect duration hits 0, remove it from the list */
+            if(status.getDuration() <= 0) statusIterator.remove();
+        }
     }
 
     public String getCharacterName() {
