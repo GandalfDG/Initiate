@@ -3,11 +3,11 @@ package rit.jack.initiate;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class TrackerActivity extends AppCompatActivity {
+public class InitiativeTrackerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracker);
+        setContentView(R.layout.activity_initiative_tracker);
     }
 }

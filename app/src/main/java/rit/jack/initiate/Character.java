@@ -1,6 +1,7 @@
 package rit.jack.initiate;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -8,11 +9,12 @@ import java.util.Iterator;
  * and a list of active status effects.
  * Created by Jack on 4/1/2016.
  */
-public class Character implements Comparable<Character> {
+public class Character implements Comparable<Character>, Comparator<Character> {
     private String characterName;
     /* the value of the initiative roll is stored regardless of current initiative position */
     private int initiativeRoll;
-    private ArrayList<StatusEffect> statusEffects;  //TODO build status effect class
+    private int initiativeNumber; //this is the number in the list of characters. This can change.
+    private ArrayList<StatusEffect> statusEffects;
 
     public Character(String characterName, int initiativeRoll) {
         this.characterName = characterName;
@@ -38,10 +40,14 @@ public class Character implements Comparable<Character> {
         }
     }
 
-    /* this will allow a list of characters to be sorted by initiative */
-    public int compareTo(Character c) {
-        Integer roll = initiativeRoll;
-        return roll.compareTo(c.getInitiativeRoll());
+    /**
+     * prints out all of the character object's information in a human-readable format
+     * @return a human-readable string
+     */
+    public String toString() {
+        return "name: " + characterName + " initiativeRoll: "  + initiativeRoll
+                + " initiativeNumber: " + initiativeNumber + System.lineSeparator()
+                + " statusEffects: " + System.lineSeparator() + statusEffects.toString();
     }
 
     public String getCharacterName() {
@@ -64,5 +70,38 @@ public class Character implements Comparable<Character> {
 
     public void addStatusEffect(StatusEffect effect) {
         statusEffects.add(effect);
+    }
+
+    public int getInitiativeNumber() {
+        return initiativeNumber;
+    }
+
+    public void setInitiativeNumber(int initiativeNumber) {
+        this.initiativeNumber = initiativeNumber;
+    }
+
+    /* this will allow a list of characters to be sorted by initiative */
+    @Override
+    public int compareTo(Character c) {
+        Integer roll = initiativeRoll;
+        return roll.compareTo(c.getInitiativeRoll());
+    }
+
+    private static Comparator<Character> initiativeNumberComparator = new Comparator<Character>() {
+        @Override
+        public int compare(Character lhs, Character rhs) {
+            Integer lhNumber = lhs.getInitiativeNumber();
+            Integer rhNumber = rhs.getInitiativeNumber();
+            return lhNumber.compareTo(rhNumber);
+        }
+    };
+
+    public static Comparator<Character> getInitiativeNumberComparator() {
+        return initiativeNumberComparator;
+    }
+
+    @Override
+    public int compare(Character lhs, Character rhs) {
+        return 0;
     }
 }

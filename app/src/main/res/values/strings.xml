@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Initiate</string>
+    <string name="edit_status_text">Edit Status Effects</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
