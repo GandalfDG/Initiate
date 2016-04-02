@@ -4,10 +4,6 @@
 
     <application>
         <activity android:name=".InitiativeTrackerActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

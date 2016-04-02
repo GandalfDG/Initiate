@@ -3,6 +3,7 @@ package rit.jack.initiate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * A combat is a list of characters ordered by their initiative order (not necessarily their
@@ -12,6 +13,7 @@ import java.util.Comparator;
 public class Combat {
     private ArrayList<Character> combatList;
     private Character currentCharacter;
+    private Iterator<Character> combatIterator = combatList.iterator();
 
     public Combat(ArrayList<Character> combatList) {
         this.combatList = combatList;
@@ -24,6 +26,20 @@ public class Combat {
     public void startCombat() {
         Collections.sort(combatList);
         currentCharacter = combatList.get(0);
+    }
+
+    public void nextTurn() {
+        combatList.add(currentCharacter);
+        combatList.remove(0);
+    }
+
+    /**
+     * traverses the combatList sorted by initiative roll and assigns turn numbers
+     */
+    private void assignInitiativeNumbers() {
+        for(int i = 0; i < combatList.size(); i++) {
+            combatList.get(i).setInitiativeNumber(i + 1);
+        }
     }
 
     /**
@@ -40,6 +56,7 @@ public class Combat {
      * @param position the position where the character will be inserted
      */
     public void addCharacter(Character c, int position) {
-
+        combatList.add(position, c);
+        assignInitiativeNumbers();
     }
 }

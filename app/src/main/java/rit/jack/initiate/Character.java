@@ -15,6 +15,7 @@ public class Character implements Comparable<Character>, Comparator<Character> {
     private int initiativeRoll;
     private int initiativeNumber; //this is the number in the list of characters. This can change.
     private ArrayList<StatusEffect> statusEffects;
+    private Iterator<StatusEffect> statusIterator;
 
     public Character(String characterName, int initiativeRoll) {
         this.characterName = characterName;
@@ -48,6 +49,14 @@ public class Character implements Comparable<Character>, Comparator<Character> {
         return "name: " + characterName + " initiativeRoll: "  + initiativeRoll
                 + " initiativeNumber: " + initiativeNumber + System.lineSeparator()
                 + " statusEffects: " + System.lineSeparator() + statusEffects.toString();
+    }
+
+    public Iterator<StatusEffect> getStatusIterator() {
+        return statusIterator;
+    }
+
+    public ArrayList<StatusEffect> getStatusEffects() {
+        return statusEffects;
     }
 
     public String getCharacterName() {
