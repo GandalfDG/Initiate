@@ -59,6 +59,12 @@ public class Character implements Comparable<Character>, Comparator<Character> {
         return statusEffects;
     }
 
+    public boolean hasStatus() {
+        if(statusEffects.size() == 0)
+            return false;
+        return true;
+    }
+
     private String statusEffectsString() {
         String statusEffectsString = System.lineSeparator();
         if(statusEffects.size() == 0) return "none";

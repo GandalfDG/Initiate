@@ -13,13 +13,14 @@ import java.util.Iterator;
 public class Combat {
     private ArrayList<Character> combatList;
     private Character currentCharacter;
-    private Iterator<Character> combatIterator = combatList.iterator();
+    private Iterator<Character> combatIterator;
     private int currentCharacterPos; // a pointer to the current character in the list
     private int roundEndPos; // a pointer to the character after which a new round begins
     private int roundNum;
 
     public Combat(ArrayList<Character> combatList) {
         this.combatList = combatList;
+        combatIterator = this.combatList.iterator();
         startCombat();
     }
 

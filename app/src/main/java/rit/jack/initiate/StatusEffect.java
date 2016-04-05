@@ -26,9 +26,12 @@ public class StatusEffect {
     }
 
     public String toString() {
+        String effectString = effectName;
+        if(effectDescription != null)
+            effectString += ": " + effectDescription;
         if(!permanent)
-            return effectName + ": " + effectDescription + " for " + duration + " rounds.";
-        return effectName + ": " + effectDescription;
+            effectString += " for " + duration + " rounds";
+        return effectString;
     }
 
     public String getEffectName() {
