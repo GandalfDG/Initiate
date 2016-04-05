@@ -25,6 +25,12 @@ public class StatusEffect {
         this.permanent = permanent;
     }
 
+    public String toString() {
+        if(!permanent)
+            return effectName + ": " + effectDescription + " for " + duration + " rounds.";
+        return effectName + ": " + effectDescription;
+    }
+
     public String getEffectName() {
         return effectName;
     }

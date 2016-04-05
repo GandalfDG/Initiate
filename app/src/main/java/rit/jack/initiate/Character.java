@@ -21,12 +21,14 @@ public class Character implements Comparable<Character>, Comparator<Character> {
         this.characterName = characterName;
         this.initiativeRoll = initiativeRoll;
         statusEffects = new ArrayList<StatusEffect>();
+        statusIterator =  statusEffects.iterator();
     }
 
     public Character(String characterName, int initiativeRoll, ArrayList<StatusEffect> statusEffects) {
         this.characterName = characterName;
         this.initiativeRoll = initiativeRoll;
         this.statusEffects = statusEffects;
+        statusIterator = statusEffects.iterator();
     }
 
     /* after a character's turn is taken, the duration of status effects is decremented by 1 */
@@ -46,17 +48,24 @@ public class Character implements Comparable<Character>, Comparator<Character> {
      * @return a human-readable string
      */
     public String toString() {
-        return "name: " + characterName + " initiativeRoll: "  + initiativeRoll
-                + " initiativeNumber: " + initiativeNumber + System.lineSeparator()
-                + " statusEffects: " + System.lineSeparator() + statusEffects.toString();
+        return "name: " + characterName + "; initiativeRoll: "  + initiativeRoll
+                + "; initiativeNumber: " + initiativeNumber + System.lineSeparator()
+                + "statusEffects: " + System.lineSeparator() + statusEffectsString()
+                + System.lineSeparator();
     }
 
-    public Iterator<StatusEffect> getStatusIterator() {
-        return statusIterator;
-    }
 
     public ArrayList<StatusEffect> getStatusEffects() {
         return statusEffects;
+    }
+
+    private String statusEffectsString() {
+        String statusEffectsString = System.lineSeparator();
+        if(statusEffects.size() == 0) return "none";
+        while(statusIterator.hasNext()) {
+            statusEffectsString += statusIterator.next().toString() + System.lineSeparator();
+        }
+        return statusEffectsString;
     }
 
     public String getCharacterName() {

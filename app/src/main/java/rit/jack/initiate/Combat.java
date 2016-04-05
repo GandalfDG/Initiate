@@ -14,9 +14,13 @@ public class Combat {
     private ArrayList<Character> combatList;
     private Character currentCharacter;
     private Iterator<Character> combatIterator = combatList.iterator();
+    private int currentCharacterPos; // a pointer to the current character in the list
+    private int roundEndPos; // a pointer to the character after which a new round begins
+    private int roundNum;
 
     public Combat(ArrayList<Character> combatList) {
         this.combatList = combatList;
+        startCombat();
     }
 
     /**
@@ -25,12 +29,37 @@ public class Combat {
      */
     public void startCombat() {
         Collections.sort(combatList);
-        currentCharacter = combatList.get(0);
+        assignInitiativeNumbers();
+        currentCharacterPos = 0;
+        currentCharacter = getCurrentCharacter();
+        roundNum = 0;
+        roundEndPos = combatList.size() - 1;
     }
 
     public void nextTurn() {
-        combatList.add(currentCharacter);
-        combatList.remove(0);
+        // when a character's turn ends, decrement his status effect durations
+        currentCharacter.updateStatusDuration();
+        currentCharacterPos++;
+
+        /** if the next character is the first character in the new round
+         * increment the round number counter.
+         */
+        if(currentCharacterPos == roundEndPos + 1) {
+            roundNum++;
+        }
+
+        /* if the end of the combat list is reached, reset the pointer to the
+         * first character in the list.
+         */
+        if(currentCharacterPos >= combatList.size()) {
+            currentCharacterPos = 0;
+        }
+
+        currentCharacter = getCurrentCharacter();
+    }
+
+    private Character getCurrentCharacter() {
+        return combatList.get(currentCharacterPos);
     }
 
     /**
@@ -58,5 +87,6 @@ public class Combat {
     public void addCharacter(Character c, int position) {
         combatList.add(position, c);
         assignInitiativeNumbers();
+        roundEndPos++;
     }
 }
