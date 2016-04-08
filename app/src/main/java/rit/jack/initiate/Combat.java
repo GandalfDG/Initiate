@@ -78,7 +78,10 @@ public class Combat {
      */
     private void assignInitiativeNumbers() {
         for(int i = 0; i < combatList.size(); i++) {
-            combatList.get(i).setInitiativeNumber(i + 1);
+            Character character = combatList.get(i);
+            if(character.isActive()) {
+                combatList.get(i).setInitiativeNumber(i + 1);
+            }
         }
     }
 

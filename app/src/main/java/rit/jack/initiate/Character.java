@@ -14,6 +14,7 @@ public class Character implements Comparable<Character>, Comparator<Character> {
     /* the value of the initiative roll is stored regardless of current initiative position */
     private int initiativeRoll;
     private int initiativeNumber; //this is the number in the list of characters. This can change.
+    private boolean active;
     private ArrayList<StatusEffect> statusEffects;
     private Iterator<StatusEffect> statusIterator;
 
@@ -22,6 +23,7 @@ public class Character implements Comparable<Character>, Comparator<Character> {
         this.initiativeRoll = initiativeRoll;
         statusEffects = new ArrayList<StatusEffect>();
         statusIterator =  statusEffects.iterator();
+        active = true;
     }
 
     public Character(String characterName, int initiativeRoll, ArrayList<StatusEffect> statusEffects) {
@@ -29,6 +31,7 @@ public class Character implements Comparable<Character>, Comparator<Character> {
         this.initiativeRoll = initiativeRoll;
         this.statusEffects = statusEffects;
         statusIterator = statusEffects.iterator();
+        active = true;
     }
 
     /* after a character's turn is taken, the duration of status effects is decremented by 1 */
@@ -57,6 +60,18 @@ public class Character implements Comparable<Character>, Comparator<Character> {
 
     public ArrayList<StatusEffect> getStatusEffects() {
         return statusEffects;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void makeActive() {
+        active = true;
+    }
+
+    public void makeInactive() {
+        active = false;
     }
 
     public boolean hasStatus() {
