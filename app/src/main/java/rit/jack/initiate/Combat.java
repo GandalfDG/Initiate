@@ -12,6 +12,7 @@ import java.util.Iterator;
  */
 public class Combat {
     private ArrayList<Character> combatList;
+    private ArrayList<Character> readiedActions;
     private Character currentCharacter;
     private Iterator<Character> combatIterator;
     private int currentCharacterPos; // a pointer to the current character in the list
@@ -57,6 +58,15 @@ public class Combat {
         }
 
         currentCharacter = getCurrentCharacter();
+    }
+
+    public void readyAction() { //TODO figure this out
+    }
+
+    public void delayAction(int position) {
+        combatList.add(position, currentCharacter);
+        combatList.remove(currentCharacterPos);
+        assignInitiativeNumbers();
     }
 
     private Character getCurrentCharacter() {
